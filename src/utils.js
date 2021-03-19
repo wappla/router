@@ -1,7 +1,6 @@
 import http from 'http'
 import got from 'got'
 import testListen from 'test-listen'
-import { ok } from './responses'
 
 export function createTestClient(server, headers) {
     const extension = {
