@@ -1,4 +1,4 @@
-/* eslint-disable no-await-in-loop */
+/* eslint-disable no-restricted-syntax */
 import { parse } from 'url'
 import UrlPattern from 'url-pattern'
 import * as constants from './constants'
@@ -44,7 +44,6 @@ function createRoute(method, path, handler) {
 
 export default function createRouter(...routes) {
     return (req, res) => {
-        // eslint-disable-next-line no-restricted-syntax
         for (const route of routes) {
             route(req, res)
         }
