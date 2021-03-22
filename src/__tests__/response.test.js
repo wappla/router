@@ -9,11 +9,11 @@ import {
     internalServerError,
 } from '../responses'
 
-const createServerWithResponse = (handleResponse, message) => {
-    return createTestServer(createRouter(
+const createServerWithResponse = (handleResponse, message) => (
+    createTestServer(createRouter(
         get('/', (req, res) => handleResponse(res, message)),
     ))
-}
+)
 
 test('if \'ok\' handles response correctly', async () => {
     const message = 'Test'

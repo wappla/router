@@ -53,7 +53,7 @@ test('if router adds \'params\' to req', async () => {
     await client.get(`test/${id}`)
     expect(handler).toHaveBeenCalledWith(
         expect.objectContaining({
-            params: { id }
+            params: { id },
         }),
         expect.anything(),
     )
@@ -70,7 +70,7 @@ test('if router adds \'query\' to req', async () => {
     await client.get(`test?id=${id}`)
     expect(handler).toHaveBeenCalledWith(
         expect.objectContaining({
-            query: { id: '1' }
+            query: { id: '1' },
         }),
         expect.anything(),
     )

@@ -37,13 +37,14 @@ function createRoute(method, path, handler) {
         }
         return handler(
             Object.assign(req, { params, query }),
-            res
+            res,
         )
     }
 }
 
 export default function createRouter(...routes) {
     return (req, res) => {
+        // eslint-disable-next-line no-restricted-syntax
         for (const route of routes) {
             route(req, res)
         }

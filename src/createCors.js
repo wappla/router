@@ -15,7 +15,7 @@ const DEFAULT_ALLOW_METHODS = [
     PUT,
     PATCH,
     DELETE,
-    OPTIONS
+    OPTIONS,
 ]
 const DEFAULT_ALLOW_HEADERS = [
     'X-Requested-With',
@@ -23,7 +23,7 @@ const DEFAULT_ALLOW_HEADERS = [
     'X-HTTP-Method-Override',
     'Content-Type',
     'Authorization',
-    'Accept'
+    'Accept',
 ]
 
 export default function createCors(corsOptions = {}) {
@@ -58,6 +58,7 @@ export default function createCors(corsOptions = {}) {
             res.setHeader('Access-Control-Allow-Headers', allowHeaders.join(','))
             res.setHeader('Access-Control-Max-Age', `${maxAge}`)
         }
+        // eslint-disable-next-line consistent-return
         return handler(req, res, ...restArgs)
     }
 }

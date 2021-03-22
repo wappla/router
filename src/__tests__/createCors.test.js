@@ -7,7 +7,7 @@ test('if \'createCors\' handles get route', async () => {
     const language = 'en'
     const handler = jest.fn((req, res) => ok(res))
     const cors = createCors({
-        extendAllowHeaders: ['language']
+        extendAllowHeaders: ['language'],
     })
     const server = await createTestServer(createRouter(
         get('/', cors(handler)),
@@ -16,7 +16,7 @@ test('if \'createCors\' handles get route', async () => {
     await client.get('')
     expect(handler).toHaveBeenCalledWith(
         expect.objectContaining({
-            headers: expect.objectContaining({ language })
+            headers: expect.objectContaining({ language }),
         }),
         expect.anything(),
     )

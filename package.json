@@ -1,16 +1,26 @@
 {
-  "name": "dashdot-router",
-  "version": "1.0.0",
-  "scripts": {
-    "test": "jest",
-    "test:coverage": "jest --coverage"
-  },
-  "dependencies": {
-    "@babel/plugin-transform-runtime": "^7.13.10",
-    "@babel/preset-env": "^7.13.10",
-    "got": "^11.8.2",
-    "jest": "^26.6.3",
-    "test-listen": "^1.1.0",
-    "url-pattern": "^1.0.3"
-  }
+    "name": "@dashdot/router",
+    "version": "0.1.0",
+    "scripts": {
+        "test": "jest",
+        "test:coverage": "jest --coverage"
+    },
+    "dependencies": {
+        "url-pattern": "^1.0.3"
+    },
+    "devDependencies": {
+        "@babel/plugin-transform-runtime": "^7.13.10",
+        "@babel/preset-env": "^7.13.10",
+        "@dashdot/eslint-config-base": "^0.1.1",
+        "eslint": "^7.22.0",
+        "eslint-config-airbnb-base": "^14.2.1",
+        "eslint-plugin-import": "^2.22.1",
+        "eslint-plugin-jest": "^24.3.2",
+        "got": "^11.8.2",
+        "jest": "^26.6.3",
+        "test-listen": "^1.1.0"
+    },
+    "eslintConfig": {
+        "extends": "@dashdot/eslint-config-base"
+    }
 }
