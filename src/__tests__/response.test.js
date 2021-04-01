@@ -1,4 +1,5 @@
-import createRouter, { get } from '../createRouter'
+import createRouter from '../createRouter'
+import { get } from '../routes'
 import { createTestClient, createTestServer } from '../utils'
 import {
     ok,

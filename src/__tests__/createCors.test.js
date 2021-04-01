@@ -1,5 +1,6 @@
-import createRouter, { get } from '../createRouter'
+import createRouter from '../createRouter'
 import createCors from '../createCors'
+import { get } from '../routes'
 import { ok } from '../responses'
 import { createTestClient, createTestServer } from '../utils'
 

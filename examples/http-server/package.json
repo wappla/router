@@ -10,7 +10,7 @@
         "start": "node index.js"
     },
     "dependencies": {
-        "@dashdot/router": "^0.1.0",
+        "@dashdot/router": "file:../..",
         "nodemon": "^2.0.7"
     }
 }

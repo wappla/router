@@ -1,15 +1,12 @@
 import { createServer } from 'http'
-import router, {
-    get,
-    post,
-    put,
-    del,
-    ok
-} from '@dashdot/router'
+import { creatRouter, get, post, put, del, ok } from '@dashdot/router/index.js'
 
-const { PORT, HOST } = process.env
+const {
+    PORT = 3000,
+    HOST = 'localhost'
+} = process.env
 
-const server = createServer(router(
+const server = createServer(creatRouter(
     get('/posts/:id', (req, res) => ok(res, req.params.id)),
     post('/posts/:id', (req, res) => ok(res, req.params.id)),
     put('/posts/:id', (req, res) => ok(res, req.params.id)),
