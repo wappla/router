@@ -1,6 +1,6 @@
 {
     "name": "@dashdot/router",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "description": "A simple and functional Node router with some helpers.",
     "type": "module",
     "license": "MIT",
