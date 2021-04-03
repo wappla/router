@@ -1,13 +1,14 @@
-import createRouter, {
+import createRouter from '../createRouter.js'
+import {
     get,
     post,
     put,
     patch,
     del,
     head,
-} from '../createRouter'
-import { ok } from '../responses'
-import { createTestClient, createTestServer } from '../utils'
+} from '../routes.js'
+import { ok } from '../responses.js'
+import { createTestClient, createTestServer } from '../utils.js'
 
 const createOkHandler = (message) => (req, res) => ok(res, message)
 
@@ -53,7 +54,7 @@ test('if router adds \'params\' to req', async () => {
     await client.get(`test/${id}`)
     expect(handler).toHaveBeenCalledWith(
         expect.objectContaining({
-            params: { id }
+            params: { id },
         }),
         expect.anything(),
     )
@@ -70,7 +71,7 @@ test('if router adds \'query\' to req', async () => {
     await client.get(`test?id=${id}`)
     expect(handler).toHaveBeenCalledWith(
         expect.objectContaining({
-            query: { id: '1' }
+            query: { id: '1' },
         }),
         expect.anything(),
     )
