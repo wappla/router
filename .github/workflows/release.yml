@@ -1,4 +1,4 @@
-name: Run tests and publish create on release
+name: Publish on release
 on:
   release:
     types: [created]
