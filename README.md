@@ -20,11 +20,11 @@ yarn add @dashdot/router
 
 ```javascript
 import { createServer } from 'http'
-import router, { get, post, put, del, ok } from '@dashdot/router'
+import { createRouter, get, post, put, del, ok } from '@dashdot/router'
 
 const { PORT, HOST } = process.env
 
-const server = createServer(router(
+const server = createServer(createRouter(
     get('/posts/:id', (req, res) => ok(res, req.params.id)),
     post('/posts/:id', (req, res) => ok(res, req.params.id)),
     put('/posts/:id', (req, res) => ok(res, req.params.id)),
