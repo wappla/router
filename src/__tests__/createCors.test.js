@@ -1,8 +1,8 @@
-import createRouter from '../createRouter'
-import createCors from '../createCors'
-import { get } from '../routes'
-import { ok } from '../responses'
-import { createTestClient, createTestServer } from '../utils'
+import createRouter from '../createRouter.js'
+import createCors from '../createCors.js'
+import { get } from '../routes.js'
+import { ok } from '../responses.js'
+import { createTestClient, createTestServer } from '../utils.js'
 
 test('if \'createCors\' handles get route', async () => {
     const language = 'en'

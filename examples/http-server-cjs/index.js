@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 const { createServer } = require('http')
 const {
     creatRouter,

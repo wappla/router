@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import { createServer } from 'http'
 import {
     creatRouter,

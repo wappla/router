@@ -34,6 +34,9 @@
         "typescript": "^4.2.3"
     },
     "eslintConfig": {
-        "extends": "@dashdot/eslint-config-base"
+        "extends": "@dashdot/eslint-config-base",
+        "rules": {
+            "import/extensions": ["error", "always", { "ignorePackages": true } ]
+        }
     }
 }
