@@ -1,4 +1,4 @@
-import createRouter from '../createRouter.js'
+import createRouter from '../createRouter'
 import {
     get,
     post,
@@ -6,9 +6,9 @@ import {
     patch,
     del,
     head,
-} from '../routes.js'
-import { ok } from '../responses.js'
-import { createTestClient, createTestServer } from '../utils.js'
+} from '../routes'
+import { ok } from '../responses'
+import { createTestClient, createTestServer } from '../testing'
 
 const createOkHandler = (message) => (req, res) => ok(res, message)
 

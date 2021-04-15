@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-syntax */
 import { parse } from 'url'
 import UrlPattern from 'url-pattern'
-import * as constants from './constants.js'
+import * as constants from './constants'
 
 const {
     GET,

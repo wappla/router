@@ -1,6 +1,6 @@
-import createRouter from '../createRouter.js'
-import { get } from '../routes.js'
-import { createTestClient, createTestServer } from '../utils.js'
+import createRouter from '../createRouter'
+import { get } from '../routes'
+import { createTestClient, createTestServer } from '../testing'
 import {
     ok,
     json,
@@ -8,7 +8,7 @@ import {
     notFound,
     badRequest,
     internalServerError,
-} from '../responses.js'
+} from '../responses'
 
 const createServerWithResponse = (handleResponse, message) => (
     createTestServer(createRouter(

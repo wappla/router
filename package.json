@@ -36,8 +36,5 @@
     },
     "eslintConfig": {
         "extends": "@dashdot/eslint-config-base",
-        "rules": {
-            "import/extensions": ["error", "always", { "ignorePackages": true } ]
-        }
     }
 }
