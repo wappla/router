@@ -3,7 +3,9 @@
     "version": "0.4.5",
     "description": "A simple and functional native Node router with some helpers.",
     "license": "MIT",
-    "files": ["dist/"],
+    "files": [
+        "dist/"
+    ],
     "main": "./dist/cjs/index.js",
     "exports": {
         ".": {
@@ -15,6 +17,7 @@
         "lint": "eslint .",
         "test": "jest",
         "test:coverage": "jest --coverage",
+        "codecov": "codecov",
         "build": "rm -rf dist/* && tsc -p tsconfig-esm.json && tsc -p tsconfig-cjs.json && ./fixup",
         "prepare": "npm run build"
     },
@@ -25,6 +28,7 @@
         "@babel/plugin-transform-runtime": "^7.13.10",
         "@babel/preset-env": "^7.13.10",
         "@dashdot/eslint-config-base": "^0.1.1",
+        "codecov": "^3.8.1",
         "eslint": "^7.22.0",
         "eslint-config-airbnb-base": "^14.2.1",
         "eslint-plugin-import": "^2.22.1",
@@ -35,6 +39,6 @@
         "typescript": "^4.2.3"
     },
     "eslintConfig": {
-        "extends": "@dashdot/eslint-config-base",
+        "extends": "@dashdot/eslint-config-base"
     }
 }
