@@ -1,7 +1,7 @@
 # Dashdot Router
 
-[![build](https://github.com/wappla/router/actions/workflows/on_push_main.yml/badge.svg?branch=main)](https://github.com/wappla/router/actions/workflows/on_push_main.yml)
-[![codecov](https://codecov.io/gh/wappla/router/branch/main/graph/badge.svg?token=DRM4BZC40Z)](https://codecov.io/gh/wappla/router)
+[![build](https://img.shields.io/github/workflow/status/wappla/router/Build?style=flat&colorA=000000&colorB=000000)](https://github.com/wappla/router/actions/workflows/on_push_main.yml)
+[![codecov](https://img.shields.io/codecov/c/github/wappla/router?style=flat&colorA=000000&colorB=000000)](https://codecov.io/gh/wappla/router)
 
 A simple and functional Node router with some helpers.
 
@@ -23,7 +23,7 @@ yarn add @dashdot/router
 
 ```javascript
 import { createServer } from 'http'
-import { createRouter, get, post, put, del, ok } from '@dashdot/router'
+import { createRouter, get, post, put, del, all, ok, notFound } from '@dashdot/router'
 
 const { PORT, HOST } = process.env
 
@@ -32,6 +32,7 @@ const server = createServer(createRouter(
     post('/posts/:id', (req, res) => ok(res, req.params.id)),
     put('/posts/:id', (req, res) => ok(res, req.params.id)),
     del('/posts/:id', (req, res) => ok(res, req.params.id)),
+    all('/*', (req, res) => notFound(res)),
 ))
 
 server.listen(PORT, HOST, () => {

@@ -1,8 +1,12 @@
+/* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
 export default function createRouter(...routes) {
-    return (req, res) => {
+    return async (req, res) => {
         for (const route of routes) {
-            route(req, res)
+            await route(req, res)
+            if (res.headersSent) {
+                return
+            }
         }
     }
 }
