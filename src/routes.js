@@ -26,7 +26,7 @@ function createRoute(methods, path, handler) {
         throw new Error('You need to set a valid handler.')
     }
     const pattern = new UrlPattern(path, PATTERN_OPTIONS)
-    return (req, res) => {
+    return (req, res, ...args) => {
         if (!methods.includes(req.method)) {
             return null
         }
@@ -38,6 +38,7 @@ function createRoute(methods, path, handler) {
         return handler(
             Object.assign(req, { params, query }),
             res,
+            ...args
         )
     }
 }

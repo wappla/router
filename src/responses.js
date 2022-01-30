@@ -6,6 +6,7 @@ const {
     NOT_FOUND,
     BED_REQUEST,
     INTERNAL_SERVER_ERROR,
+    TOO_MANY_REQUESTS,
 } = constants
 
 export function ok(res, message = 'Ok') {
@@ -49,5 +50,13 @@ export function internalServerError(
     message = 'Internal server error',
 ) {
     res.writeHead(INTERNAL_SERVER_ERROR)
+    res.end(message)
+}
+
+export function tooManyRequests(
+    res,
+    message = 'Too many requests',
+) {
+    res.writeHead(TOO_MANY_REQUESTS)
     res.end(message)
 }

@@ -46,8 +46,9 @@ test('if \'methodNotAllowed\' handles response correctly', async () => {
     } catch (e) {
         expect(e.response.statusCode).toEqual(400)
         expect(e.response.body).toEqual(message)
+    } finally {
+        server.close()
     }
-    server.close()
 })
 
 test('if \'notFound\' handles response correctly', async () => {
@@ -60,8 +61,9 @@ test('if \'notFound\' handles response correctly', async () => {
     } catch (e) {
         expect(e.response.statusCode).toEqual(404)
         expect(e.response.body).toEqual(message)
+    } finally {
+        server.close()
     }
-    server.close()
 })
 
 test('if \'badRequest\' handles response correctly', async () => {
@@ -74,8 +76,9 @@ test('if \'badRequest\' handles response correctly', async () => {
     } catch (e) {
         expect(e.response.statusCode).toEqual(405)
         expect(e.response.body).toEqual(message)
+    } finally {
+        server.close()
     }
-    server.close()
 })
 
 test('if \'internalServerError\' handles response correctly', async () => {
@@ -88,6 +91,7 @@ test('if \'internalServerError\' handles response correctly', async () => {
     } catch (e) {
         expect(e.response.statusCode).toEqual(500)
         expect(e.response.body).toEqual(message)
+    } finally {
+        server.close()
     }
-    server.close()
 })

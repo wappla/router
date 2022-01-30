@@ -3,6 +3,7 @@ export const METHOD_NOT_ALLOWED = 400
 export const NOT_FOUND = 404
 export const BED_REQUEST = 405
 export const INTERNAL_SERVER_ERROR = 500
+export const TOO_MANY_REQUESTS = 429
 
 export const GET = 'GET'
 export const POST = 'POST'

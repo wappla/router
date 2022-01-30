@@ -5,19 +5,20 @@ import { ok } from '../responses'
 import { createTestClient, createTestServer } from '../testing'
 
 test('if \'createCors\' handles get route', async () => {
-    const language = 'en'
+    const trace = '123'
     const handler = jest.fn((req, res) => ok(res))
     const cors = createCors({
-        extendAllowHeaders: ['language'],
+        extendAllowHeaders: ['trace'],
     })
     const server = await createTestServer(createRouter(
         get('/', cors(handler)),
     ))
-    const client = await createTestClient(server, { language })
+    const headers = { trace }
+    const client = await createTestClient(server, { headers })
     await client.get('')
     expect(handler).toHaveBeenCalledWith(
         expect.objectContaining({
-            headers: expect.objectContaining({ language }),
+            headers: expect.objectContaining({ trace }),
         }),
         expect.anything(),
     )

@@ -2,10 +2,10 @@ import http from 'http'
 import got from 'got'
 import testListen from 'test-listen'
 
-export function createTestClient(server, headers) {
+export function createTestClient(server, options) {
     const extension = {
-        headers,
         prefixUrl: server.uri,
+        ...options
     }
     const client = got.extend(extension)
     return client

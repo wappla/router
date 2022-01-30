@@ -27,7 +27,7 @@ const DEFAULT_ALLOW_HEADERS = [
 ]
 
 export default function createCors(corsOptions = {}) {
-    return (handler) => (req, res, ...restArgs) => {
+    return (handler) => (req, res, ...args) => {
         const {
             origin = '*',
             maxAge = DEFAULT_MAX_AGE_SECONDS,
@@ -59,6 +59,6 @@ export default function createCors(corsOptions = {}) {
             res.setHeader('Access-Control-Max-Age', `${maxAge}`)
         }
         // eslint-disable-next-line consistent-return
-        return handler(req, res, ...restArgs)
+        return handler(req, res, ...args)
     }
 }
