@@ -19,7 +19,7 @@ Or with Yarn:
 yarn add @dashdot/router
 ```
 
-### API
+## API
 
 ```javascript
 import { createServer } from 'http'
@@ -38,4 +38,30 @@ const server = createServer(createRouter(
 server.listen(PORT, HOST, () => {
     console.log(`Server started and listening on http://${HOST}:${PORT}`)
 })
+```
+
+## Cross-Origin Resource Sharing
+
+```javascript
+const cors = createCors({
+    allowMethods: ['GET'],
+    extendAllowHeaders: ['trace']
+})
+
+const server = createServer(createRouter(
+    get('/posts', (req, res) => cors(ok(res))),
+))
+```
+
+## Rate limiting
+
+```javascript
+const rateLimit = createRateLimit({
+    window: 1000, // 1 sec
+    limit: 10, // 10 requests
+})
+
+const server = createServer(createRouter(
+    get('/posts', (req, res) => rateLimit(ok(res))),
+))
 ```
