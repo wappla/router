@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
 const { createServer } = require('http')
 const {
-    creatRouter,
+    createRouter,
     get,
     post,
     ok
@@ -12,7 +12,7 @@ const {
     HOST = 'localhost'
 } = process.env
 
-const server = createServer(creatRouter(
+const server = createServer(createRouter(
     get('/posts/:id', (req, res) => ok(res, req.params.id)),
     post('/posts/:id', (req, res) => ok(res, req.params.id)),
 ))
