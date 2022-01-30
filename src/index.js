@@ -1,5 +1,6 @@
 export { default as createRouter } from './createRouter'
 export { default as createCors } from './createCors'
+export { default as createRateLimit } from './createRateLimit'
 export { default as readRequestBody } from './readRequestBody'
 export * from './routes'
 export * from './responses'
