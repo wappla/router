@@ -4,25 +4,22 @@ import { tooManyRequests } from './responses'
 export class MemoryStore {
     constructor(window) {
         this.hits = new Map()
-        this.interval = setInterval(this.reset.bind(this), window)
-        process.on('SIGINT', this.destroy.bind(this))
-        process.on('SIGTERM', this.destroy.bind(this))
-        process.on('exit', this.destroy.bind(this))
+        this.window = window
     }
 
-    increment(key) {
-        let counter = this.hits.get(key) || 0
-        counter += 1
-        this.hits.set(key, counter)
-        return counter
+    registerHit(key) {
+        const now = Date.now()
+        const timestamps = this.hits.get(key) || []
+        const timestampsWithinWindow = timestamps.filter((time) => (
+            time + this.window > now
+        ))
+        const timestampsToStore = [now, ...timestampsWithinWindow]
+        this.hits.set(key, timestampsToStore)
+        return timestampsWithinWindow.length
     }
 
     reset() {
         this.hits.clear()
-    }
-
-    destroy() {
-        clearInterval(this.interval)
     }
 }
 
@@ -31,6 +28,7 @@ const defaultKeyGenerator = (req) => (
     || req.connection.remoteAddress
     || req.socket.remoteAddress
     || req.connection.socket.remoteAddress
+    || null
 )
 
 export default function createRateLimit({
@@ -46,13 +44,14 @@ export default function createRateLimit({
         if (!key) {
             return handler(req, res, ...args)
         }
-        const remaining = limit - store.increment(key)
+        const hits = store.registerHit(key)
+        const remaining = limit - hits
         if (headers && !res.finished && !res.headersSent) {
             res.setHeader('X-Rate-Limit-Limit', limit)
             res.setHeader('X-Rate-Limit-Remaining', Math.max(0, remaining))
             res.setHeader('X-Rate-Limit-Reset', reset)
         }
-        if (remaining < 0) {
+        if (remaining < limit) {
             tooManyRequests(res)
             return null
         }

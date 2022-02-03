@@ -17,3 +17,9 @@ export async function createTestServer(handler) {
     server.uri = uri
     return server
 }
+
+export const delay = (time, value) => (
+    new Promise((resolve) => {
+        setTimeout(resolve, time, value)
+    })
+)
