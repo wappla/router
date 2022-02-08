@@ -112,6 +112,23 @@ test('if all route creators handle correctly', async () => {
     server.close()
 })
 
+test('if no routes was matched it returns 404 by default', async () => {
+    const handler = jest.fn(createOkHandler())
+    const server = await createTestServer(createRouter(
+        get('/test', handler),
+    ))
+    try {
+        expect.assertions(2)
+        const client = await createTestClient(server)
+        await client.get('other')
+    } catch (e) {
+        expect(handler).not.toHaveBeenCalled()
+        expect(e.response.statusCode).toEqual(404)
+    } finally {
+        server.close()
+    }
+})
+
 test('if catch all routes returns 404', async () => {
     const server = await createTestServer(createRouter(
         get('/*', createNotFoundHandler()),
