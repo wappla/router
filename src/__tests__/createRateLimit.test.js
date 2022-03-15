@@ -29,23 +29,45 @@ test('if \'createRateLimit\' returns 429 when too many requests are performed', 
         server.close()
     }
 })
+test('if \'createRateLimit\' returns 200 when we stay withing limit', async () => {
+    const onLimitReached = jest.fn()
+    const rateLimit = createRateLimit({
+        limit: 1,
+        window: 1000, // 1sec
+        onLimitReached,
+    })
+    const handler = jest.fn((req, res) => ok(res))
+    const server = await createTestServer(createRouter(
+        get('/', rateLimit(handler)),
+    ))
+    const retry = { limit: 0 }
+    const client = await createTestClient(server, { retry })
+    await client.get('')
+    await delay(1001)
+    await client.get('')
+    await delay(1001)
+    await client.get('')
+    expect(handler).toHaveBeenCalledTimes(3)
+    expect(onLimitReached).not.toHaveBeenCalledTimes(1)
+    server.close()
+})
 
 test('if \'MemoryStore\' register hits correctly', async () => {
     const key = 'test'
     const store = new MemoryStore(1000) // 1sec
     const hits1 = store.registerHit(key)
-    expect(hits1).toEqual(0)
+    expect(hits1).toEqual(1)
     await delay(500)
     const hits2 = store.registerHit(key)
-    expect(hits2).toEqual(1)
+    expect(hits2).toEqual(2)
     await delay(1001)
     const hits3 = store.registerHit(key)
-    expect(hits3).toEqual(0)
+    expect(hits3).toEqual(1)
     store.registerHit(key)
     store.registerHit(key)
     const hits4 = store.registerHit(key)
-    expect(hits4).toEqual(3)
+    expect(hits4).toEqual(4)
     await delay(1001)
     const hits5 = store.registerHit(key)
-    expect(hits5).toEqual(0)
+    expect(hits5).toEqual(1)
 })

@@ -15,7 +15,7 @@ export class MemoryStore {
         ))
         const timestampsToStore = [now, ...timestampsWithinWindow]
         this.hits.set(key, timestampsToStore)
-        return timestampsWithinWindow.length
+        return timestampsWithinWindow.length + 1
     }
 
     reset() {
@@ -52,7 +52,7 @@ export default function createRateLimit({
             res.setHeader('X-Rate-Limit-Remaining', Math.max(0, remaining))
             res.setHeader('X-Rate-Limit-Reset', reset)
         }
-        if (remaining < limit) {
+        if (remaining < 0) {
             if (typeof onLimitReached === 'function') {
                 onLimitReached(req, key)
             }
