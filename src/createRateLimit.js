@@ -35,6 +35,7 @@ export default function createRateLimit({
     window = 1000,
     limit = 1,
     keyGenerator = defaultKeyGenerator,
+    onLimitReached,
     headers = false,
     store = new MemoryStore(window)
 }) {
@@ -52,6 +53,9 @@ export default function createRateLimit({
             res.setHeader('X-Rate-Limit-Reset', reset)
         }
         if (remaining < limit) {
+            if (typeof onLimitReached === 'function') {
+                onLimitReached(req, key)
+            }
             tooManyRequests(res)
             return null
         }

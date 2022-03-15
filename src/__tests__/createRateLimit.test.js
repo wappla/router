@@ -5,9 +5,11 @@ import { ok } from '../responses'
 import { createTestClient, createTestServer, delay } from '../testing'
 
 test('if \'createRateLimit\' returns 429 when too many requests are performed', async () => {
+    const onLimitReached = jest.fn()
     const rateLimit = createRateLimit({
         limit: 1,
-        window: 1000 // 1sec
+        window: 1000, // 1sec
+        onLimitReached,
     })
     const handler = jest.fn((req, res) => ok(res))
     const server = await createTestServer(createRouter(
@@ -15,13 +17,14 @@ test('if \'createRateLimit\' returns 429 when too many requests are performed', 
     ))
     const retry = { limit: 0 }
     const client = await createTestClient(server, { retry })
-    expect.assertions(2)
+    expect.assertions(3)
     try {
         await client.get('')
         await client.get('')
     } catch (e) {
         expect(e.response.statusCode).toEqual(429)
         expect(handler).toHaveBeenCalledTimes(1)
+        expect(onLimitReached).toHaveBeenCalledTimes(1)
     } finally {
         server.close()
     }
