@@ -4,7 +4,7 @@ const {
     OK,
     METHOD_NOT_ALLOWED,
     NOT_FOUND,
-    BED_REQUEST,
+    BAD_REQUEST,
     INTERNAL_SERVER_ERROR,
     TOO_MANY_REQUESTS,
     PAYLOAD_TO_LARGE,
@@ -34,7 +34,7 @@ export function badRequest(
     res,
     message = 'Bad Request',
 ) {
-    res.writeHead(BED_REQUEST)
+    res.writeHead(BAD_REQUEST)
     res.end(message)
 }
 

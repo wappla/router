@@ -44,7 +44,7 @@ test('if \'methodNotAllowed\' handles response correctly', async () => {
     try {
         await client.get('')
     } catch (e) {
-        expect(e.response.statusCode).toEqual(400)
+        expect(e.response.statusCode).toEqual(405)
         expect(e.response.body).toEqual(message)
     } finally {
         server.close()
@@ -74,7 +74,7 @@ test('if \'badRequest\' handles response correctly', async () => {
     try {
         await client.get('')
     } catch (e) {
-        expect(e.response.statusCode).toEqual(405)
+        expect(e.response.statusCode).toEqual(400)
         expect(e.response.body).toEqual(message)
     } finally {
         server.close()
