@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals'
 import createRouter from '../createRouter'
 import createCors from '../createCors'
 import { get } from '../routes'

@@ -7,6 +7,7 @@ const {
     BED_REQUEST,
     INTERNAL_SERVER_ERROR,
     TOO_MANY_REQUESTS,
+    PAYLOAD_TO_LARGE,
 } = constants
 
 export function ok(res, message = 'Ok') {
@@ -58,5 +59,13 @@ export function tooManyRequests(
     message = 'Too many requests',
 ) {
     res.writeHead(TOO_MANY_REQUESTS)
+    res.end(message)
+}
+
+export function payloadTooLarge(
+    res,
+    message = 'Payload too large',
+) {
+    res.writeHead(PAYLOAD_TO_LARGE)
     res.end(message)
 }
