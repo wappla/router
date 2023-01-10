@@ -73,7 +73,7 @@ test('if \'readText\' handles to large payload', async () => {
         const client = await createTestClient(server)
         const text = 'test'
         await client.post('', { body: text })
-    } catch(e) {
+    } catch (e) {
         expect(e.response.statusCode).toEqual(413)
     } finally {
         server.close()
