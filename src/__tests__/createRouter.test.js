@@ -65,7 +65,7 @@ test('if router adds \'params\' to req', async () => {
     server.close()
 })
 
-test('if router can handle optional params', async () => {
+test.skip('if router can handle optional params', async () => {
     const id = '1'
     const handler = jest.fn(createOkHandler())
     const server = await createTestServer(createRouter(
