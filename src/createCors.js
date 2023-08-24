@@ -45,7 +45,11 @@ export default function createCors(corsOptions = {}) {
         if (res && res.finished) {
             return
         }
-        res.setHeader('Access-Control-Allow-Origin', origin)
+        if (typeof origin === 'function') {
+            res.setHeader('Access-Control-Allow-Origin', origin(req))
+        } else {
+            res.setHeader('Access-Control-Allow-Origin', origin)
+        }
         if (allowCredentials) {
             res.setHeader('Access-Control-Allow-Credentials', 'true')
         }

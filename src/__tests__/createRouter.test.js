@@ -65,6 +65,32 @@ test('if router adds \'params\' to req', async () => {
     server.close()
 })
 
+test('if router can handle optional params', async () => {
+    const id = '1'
+    const handler = jest.fn(createOkHandler())
+    const server = await createTestServer(createRouter(
+        get('/test/:id', handler),
+    ))
+    const client = await createTestClient(server)
+    await client.get(`test/${id}`)
+    await client.get(`test/${id}/test`)
+    expect(handler).toHaveBeenNthCalledWith(
+        1,
+        expect.objectContaining({
+            params: { id },
+        }),
+        expect.anything(),
+    )
+    expect(handler).toHaveBeenNthCalledWith(
+        2,
+        expect.objectContaining({
+            params: { id, optional: 'test' },
+        }),
+        expect.anything(),
+    )
+    server.close()
+})
+
 test('if router adds \'query\' to req', async () => {
     const id = '1'
     const handler = jest.fn(createOkHandler())
